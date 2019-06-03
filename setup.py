@@ -5,7 +5,7 @@ setup(
     version=0.1,
     description='',
     author='Christian Staudt',
-    url='http://www.point-8.de',
+    url='https://point-8.de',
     packages=['forecast_lab'],
     install_requires=[
         "numpy",
