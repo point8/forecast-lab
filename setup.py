@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(
-    name='datascience101',
+    name='forecast-lab',
     version=0.1,
     description='',
     author='Christian Staudt',
