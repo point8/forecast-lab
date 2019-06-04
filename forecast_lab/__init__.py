@@ -3,7 +3,7 @@ Tools for building and evaluating time series forecast models based on libraries
 """
 
 __author__ = "Christian Staudt"
-__copyright__ = "Copyright 2019, "
+__copyright__ = "Copyright 2019, Point 8 GmbH "
 __credits__ = ["Christian Staudt", "Christophe Cauet"]
 __license__ = "MIT"
 __version__ = "0.1"
