@@ -14,7 +14,7 @@ setup(
         "seaborn",
         "scipy",
         "scikit-learn",
-        "tensorflow",
+        "tensorflow>=2.0.0",
         "fbprophet",
         "statsmodels"
     ]

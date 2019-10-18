@@ -261,6 +261,7 @@ class RNNWrapper(ForecastWrapper):
         self,
         estimator_class,
         sliding_window_size,
+        epochs,
         estimator_params={},
         fit_params={},
 
@@ -271,6 +272,7 @@ class RNNWrapper(ForecastWrapper):
             fit_params
         )
         self.sliding_window_size = sliding_window_size
+        self.epochs = epochs
 
     def fit(
         self,
@@ -288,7 +290,9 @@ class RNNWrapper(ForecastWrapper):
         )
         n = X.shape[0]  # number of samples
         w = self.sliding_window_size  # window size
+        # convert to numpy array
         X = X.values.reshape(n, 1, w)
+        y = y.values
 
         self.network = self.estimator_class(
             **self.estimator_params
@@ -298,9 +302,7 @@ class RNNWrapper(ForecastWrapper):
             metrics=["mse"],
             optimizer="adam"
         )
-        epochs = self.fit_params["epochs"]
-        del self.fit_params["epochs"]
-        for i in range(epochs):
+        for i in range(self.epochs):
             self.network.fit(
                 X,
                 y,
