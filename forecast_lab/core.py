@@ -409,12 +409,12 @@ class ForecastEvaluation:
         plt.figure()
         plt.suptitle(f"i={iteration}")
         if ts_left is not None:
-            ts_left.plot()
-        ts_train.plot()
-        ts_test.plot()
+            plt.plot(ts_left)
+        plt.plot(ts_train)
+        plt.plot(ts_test)
         if ts_right is not None:
-            ts_right.plot()
-        pandas.Series(ts_forecast, index=ts_test.index).plot()
+            plt.plot(ts_right)
+        plt.plot(pandas.Series(ts_forecast, index=ts_test.index))
 
     def _plot_residuals(self, ts_forecast, ts_test):
         fig, ax = plt.subplots()
