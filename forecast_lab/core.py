@@ -130,9 +130,11 @@ class ProphetWrapper(ForecastWrapper):
 
     def __init__(
         self,
+        freq,
         estimator_params={},
         fit_params={},
     ):
+        self.freq = freq
         super(ProphetWrapper, self).__init__(
             fbprophet.Prophet,
             estimator_params,
@@ -149,9 +151,9 @@ class ProphetWrapper(ForecastWrapper):
         """
         if ext_vars is not None:
             raise ValueError("TODO: pass external variables to Prophet")
-        if not hasattr(ts, "freq"):
-            raise ValueError("The time series frequency attribute `freq` must be set")
-        self.freq = ts.freq
+        #if not hasattr(ts, "freq"):
+        #    raise ValueError("The time series frequency attribute `freq` must be set")
+        #self.freq = ts.freq
         # Prophet time series format
         ts_prophet = pandas.DataFrame(ts).reset_index()
         ts_prophet.columns = ["ds", "y"]
@@ -387,10 +389,10 @@ class ForecastEvaluation:
         ts_test = self.ts[split_index : split_index+self.test_window_size]
         ts_left = self.ts[:split_index - self.train_window_size]
         ts_right = self.ts[split_index + self.test_window_size:]
-        ts_train.freq = self.ts.freq
-        ts_test.freq = self.ts.freq
-        ts_left.freq = self.ts.freq
-        ts_right.freq = self.ts.freq
+        #ts_train.freq = self.ts.freq
+        #ts_test.freq = self.ts.freq
+        #ts_left.freq = self.ts.freq
+        #ts_right.freq = self.ts.freq
         return ts_left, ts_train, ts_test, ts_right
 
     def _compute_metrics(self, ts_test, ts_forecast):
