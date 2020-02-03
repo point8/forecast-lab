@@ -1,5 +1,6 @@
 import random
 import logging
+import seaborn
 import matplotlib.pyplot as plt
 import pandas
 import math
@@ -406,15 +407,18 @@ class ForecastEvaluation:
 
 
     def _show_plots(self, iteration, ts_left=None, ts_train=None, ts_test=None, ts_right=None, ts_forecast=None):
-        plt.figure()
-        plt.suptitle(f"i={iteration}")
-        if ts_left is not None:
-            plt.plot(ts_left)
-        plt.plot(ts_train)
-        plt.plot(ts_test)
-        if ts_right is not None:
-            plt.plot(ts_right)
-        plt.plot(pandas.Series(ts_forecast, index=ts_test.index))
+        # colors for rest, training segment, true segment and forecasted segment
+        with seaborn.color_palette("colorblind", 4):
+            plt.figure()
+            plt.suptitle(f"i={iteration}")
+            if ts_left is not None:
+                plt.plot(ts_left)
+            plt.plot(ts_train)
+            plt.plot(ts_test)
+            plt.plot(pandas.Series(ts_forecast, index=ts_test.index))
+            if ts_right is not None:
+                plt.plot(ts_right)
+
 
     def _plot_residuals(self, ts_forecast, ts_test):
         fig, ax = plt.subplots()
