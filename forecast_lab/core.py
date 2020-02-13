@@ -156,6 +156,8 @@ class ProphetWrapper(ForecastWrapper):
         #    raise ValueError("The time series frequency attribute `freq` must be set")
         #self.freq = ts.freq
         # Prophet time series format
+        if ext_vars:
+            raise NotImplementedError("Adding external variables is not yet implemented")
         ts_prophet = pandas.DataFrame(ts).reset_index()
         ts_prophet.columns = ["ds", "y"]
         self.model = self.estimator_class(
@@ -176,6 +178,8 @@ class ProphetWrapper(ForecastWrapper):
         number of steps after the end of the
         training series.
         """
+        if ext_vars:
+            raise NotImplementedError("Adding external variables is not yet implemented")
         forecast_df = self.model.predict(
             self.model.make_future_dataframe(periods=steps, freq=self.freq)
         )
